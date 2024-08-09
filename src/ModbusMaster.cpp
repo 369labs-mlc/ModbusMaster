@@ -65,6 +65,7 @@ void ModbusMaster::begin(uint8_t slave, Stream &serial)
   _serial = &serial;
   _u8TransmitBufferIndex = 0;
   u16TransmitBufferLength = 0;
+  _u16ResponseTimeout = ku16MBResponseTimeout;
   
 #if __MODBUSMASTER_DEBUG__
   pinMode(__MODBUSMASTER_DEBUG_PIN_A__, OUTPUT);
@@ -292,6 +293,17 @@ void ModbusMaster::clearTransmitBuffer()
   {
     _u16TransmitBuffer[i] = 0;
   }
+}
+
+
+/**
+Set a Modbus response timeout.
+
+@param u16ResponseTimeout a desired timeout in milliseconds
+*/
+void ModbusMaster::setResponseTimeout(uint16_t u16ResponseTimeout)
+{
+    _u16ResponseTimeout = u16ResponseTimeout;
 }
 
 
@@ -797,7 +809,7 @@ uint8_t ModbusMaster::ModbusMasterTransaction(uint8_t u8MBFunction)
           break;
       }
     }
-    if ((millis() - u32StartTime) > ku16MBResponseTimeout)
+    if ((millis() - u32StartTime) > _u16ResponseTimeout)
     {
       u8MBStatus = ku8MBResponseTimedOut;
     }

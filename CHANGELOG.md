@@ -1,5 +1,11 @@
 # ModbusMaster CHANGELOG
 
+## [v2.0.2](https://github.com/369labs-mlc/ModbusMaster/tree/v2.0.2) (2024-08-09)
+
+**Implemented enhancements:**
+
+- Add setResponseTimeout function to change the default 2000ms timeout
+
 ## [v2.0.0](https://github.com/4-20ma/ModbusMaster/tree/v2.0.0) (2016-09-24)
 [Full Changelog](https://github.com/4-20ma/ModbusMaster/compare/v1.0.0...v2.0.0)
 
